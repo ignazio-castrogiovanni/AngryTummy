@@ -44,10 +44,14 @@ try {
 }
 
     header('Location: http://localhost/index.php');
+    $_SESSION['loginID'] = (string) $userNode->getId();
+    $_SESSION['username'] = (string) $userNode->getName();
     die();
 
     echo 'Logged in as ' . $userNode->getName() . '<br>';
     echo 'Id is ' . $userNode->getId() . '<br>';
+
+
 
   // Now you can redirect to another page and use the
   // access token from $_SESSION['facebook_access_token']

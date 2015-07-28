@@ -44,7 +44,7 @@ echo
 
 if (isset($_SESSION['facebook_access_token']) && !is_null($_SESSION['facebook_access_token'])) {
 
-    header("Location: http://localhost/insertFood.php");
+    header("Location: http://localhost/home.php");
     die();
       // Sets the default fallback access token so we don't have to pass it to each request
 $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);

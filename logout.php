@@ -17,4 +17,5 @@
 
     session_destroy();
     header("Location: " . $urlFbLogout);
+    die();
 ?>

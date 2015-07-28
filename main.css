@@ -10,6 +10,9 @@ div {
   width: 400px;
   margin-left: 20px;
 }
+.bs-example{
+    	margin: 20px;
+    }
 
         html {
   background: url(img/Varanasi_full.jpg) no-repeat center center fixed !important;
