@@ -1,0 +1,10 @@
+TODO: 
+ //   - Insert food menu
+    - Correlation computation and show on 'Summary' page
+        -- Put a table on the right side
+//    - Select insertion date
+    - Redirect after submit
+    - Summary button
+//    - It shouldn't be possible to add the same food twice
+    - Options to delete food - near each food? - Maybe a cool bootstrap button!?
+//    - Change 'Insert your own food' to a simple text. Add a javascript that allows to submit when enter is pressed.

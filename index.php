@@ -2,7 +2,7 @@
     @ob_start();
     session_start();
 
-    set_include_path('/Applications/MAMP/htdocs/vendor');
+    set_include_path('vendor');
     require_once("autoload.php");
     //use Facebook\Facebook;
 
@@ -14,7 +14,7 @@
 
     $helper = $fb->getRedirectLoginHelper();
     $permissions = ['email', 'user_likes']; // optional
-    $loginUrl = $helper->getLoginUrl('http://localhost/login_callback.php', $permissions);
+    $loginUrl = $helper->getLoginUrl('http://ignazio-castrogiovanni.com/angrytummy/login_callback.php', $permissions);
 
 
 echo
@@ -44,7 +44,7 @@ echo
 
 if (isset($_SESSION['facebook_access_token']) && !is_null($_SESSION['facebook_access_token'])) {
 
-    header("Location: http://localhost/home.php");
+    header("Location: http://ignazio-castrogiovanni.com/angrytummy/home.php");
     die();
       // Sets the default fallback access token so we don't have to pass it to each request
 $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
@@ -72,31 +72,4 @@ echo 'Id is ' . $userNode->getId() . '<br>';
   exit;
 }
 ?>
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "root";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password);
-
-if ($conn->connect_error) {
-	die("Connection failed". $conn->connect_error);
-}
-
-
-//if(true) {
-//	echo '<h1>Oh yeah!</h1>
-//	<h2>We made it!</h2>
-//	';
-////echo '
-////<form action="insertFood.php">
-////	Food name: <input type=""text" name="foodName">
-////	<input type="submit" value="Submit">
-////</form>
-////
-////';
-//}
-?>
-
 </body>

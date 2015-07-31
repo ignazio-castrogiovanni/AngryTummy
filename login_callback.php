@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-set_include_path('/Applications/MAMP/htdocs/vendor');
+set_include_path('vendor');
 require_once("autoload.php");
 
 $fb = new Facebook\Facebook([
@@ -43,7 +43,7 @@ try {
   exit;
 }
 
-    header('Location: http://localhost/index.php');
+    header('Location: http://ignazio-castrogiovanni.com/angrytummy/index.php');
     $_SESSION['loginID'] = (string) $userNode->getId();
     $_SESSION['username'] = (string) $userNode->getName();
     die();

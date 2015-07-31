@@ -1,9 +1,9 @@
 <?php
     session_start();
 
-    $indexPagePath = "http://localhost/index.php";
+    $indexPagePath = "http://ignazio-castrogiovanni.com/angrytummy/index.php";
 
-    set_include_path('/Applications/MAMP/htdocs/vendor');
+    set_include_path('vendor');
     require_once("autoload.php");
     //use Facebook\Facebook;
 

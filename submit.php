@@ -1,11 +1,11 @@
 <?php
 session_start();
-$_SESSION['loginID'] = '10206506391273655';
 $servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "angrymemory";
+$username = "ignazio1_root";
+$password = "19Baltic";
+$dbname = "ignazio1_angrymemory";
 
+//var_dump($_POST);
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
@@ -20,9 +20,9 @@ if(!empty($_POST['check_box_foods']) && !empty($_POST['check_box_diseases'])) {
         $user_query_result = mysqli_query($conn, $sql_select_user) or die(mysql_error());
         $user = $user_query_result->fetch_assoc();
 
-        echo '<br>' . $user['ID'] . '<br>';
+       // echo '<br>' . $user['ID'] . '<br>';
 
-        echo $sql_select_user;
+        //echo $sql_select_user;
         // If user experience doesn't exist, create it.
 //        $sql_create_user_xp =  "INSERT IGNORE INTO
 //                                `FoodsUsersExperience`(`FoodUser`, `NeutralExp`, `NegativeExp`)
@@ -38,7 +38,7 @@ if(!empty($_POST['check_box_foods']) && !empty($_POST['check_box_diseases'])) {
 //            mysqli_query($conn, $sql_update_bad_xp) or die(mysql_error());
 //            } else
         {
-            echo "Set " . $checked . " as a good experience<br>";
+            //echo "Set " . $checked . " as a good experience<br>";
             // If I set a timestamp and add the same to all the TummyReactions, that could be used to identify a unique meal
             // In that case I can easily query with unique timestamp and count all the time that an even occurred in a single
             // meal. That's to avoid considering different reactions as part of different events (meals)
@@ -52,23 +52,25 @@ if(!empty($_POST['check_box_foods']) && !empty($_POST['check_box_diseases'])) {
             // $sql_create_user_xp =  "INSERT IGNORE INTO
             //                    `FoodsUsersExperience`(`Food`, `User`, `TummyReaction`)
             //                    VALUES ('" . $checked . "'" . $user['ID'] . "',0)";
-            echo '<br/>';
-            var_dump($_POST['check_box_diseases']);
-            echo '<br/>';
+            //echo '<br/>';
+            //var_dump($_POST['check_box_diseases']);
+            //echo '<br/>';
             foreach($_POST['check_box_diseases'] as $disease) {
-                echo '</br>' . $disease;
+                //echo '</br>' . $disease;
                 $sql_create_user_xp =  "INSERT IGNORE INTO
-                                `FoodsUsersExperience`(`Food`, `User`, `TummyReaction`)
-                                VALUES ('" . $checked . "','" . $user['ID'] . "'," . $disease . "); ";
+                                `FoodsUsersExperience`(`Food`, `User`, `Date`, `TummyReaction`)
+                                VALUES ('" . $checked . "','" . $user['ID'] . "','" . $_POST['date'] . "'," . $disease . "); ";
 
 //            $sql_update_neutral_xp =    "UPDATE FoodsUsersExperience
 //                                     SET NeutralExp = NeutralExp + 1
 //                                     WHERE FoodUser ='" . $food_user['ID'] . "'";
-            echo $sql_create_user_xp;
+            //echo $sql_create_user_xp;
             mysqli_query($conn, $sql_create_user_xp) or die(mysql_error());
 
-            // header('Location: http://localhost/home.php');
-           // die();
+            ob_start();
+            header('Location: http://ignazio-castrogiovanni.com/angrytummy/home.php');
+            ob_end_flush();
+            die();
             }
 
         }
