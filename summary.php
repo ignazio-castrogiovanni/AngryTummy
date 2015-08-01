@@ -21,38 +21,32 @@ echo '  <head>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
             <link rel="stylesheet" type="text/css" href="main.css">';
 
-    $servername = "localhost";
-    $username = "ignazio1_root";
-    $password = "19Baltic";
-    $dbname = "ignazio1_angrymemory";
+// Establish DB connection
+$servername = "localhost";
+$username = "ignazio1_root";
+$password = "19Baltic";
+$dbname = "ignazio1_angrymemory";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if($conn->connect_error) {
     die("DB connection error: " . $conn->connect_error);
 }
 
-// IMPORTANT - Try SELECT UNIQUE in different flavours to display the list of food for each timestamp and the list of diseases for each timestamp (meal)
-
-//Temporary query
-// SELECT Foods.Name FROM FoodsUsersExperience, Foods WHERE User = 6 AND Foods.ID = Food;
-// SELECT TummyReactions.Description FROM FoodsUsersExperience, TummyReactions WHERE User = 6 AND TummyReactions.ID = TummyReaction;
-
-
-// SELECT all distinct dates of a user.
-// For each date display Food and diseases.
+// Get all the different dates.
 $sql_distinct_dates = "SELECT DISTINCT Date FROM FoodsUsersExperience WHERE User = " . $_SESSION['userID'];
-$sql_result_dates = mysqli_query($conn, $sql_distinct_dates) or die();
+$sql_result_dates = mysqli_query($conn, $sql_distinct_dates) or die("Error in querying distinct Food Experience Dates");
 $dates = array();
 
 while($new_date = $sql_result_dates->fetch_array()) {
     $dates[] = $new_date['Date'];
 }
+
 echo '<div id="page-wrap">';
-echo '<a href="http://ignazio-castrogiovanni.com/angrytummy/index.php" class = "btn btn-default pull-right" role = "button" >Home</a>';
+echo '<a href="http://ignazio-castrogiovanni.com/angrytummy/index.php"
+        class = "btn btn-default pull-right"
+        role = "button" >Home</a>';
 
 foreach($dates as $date) {
-    //echo $dates[$i];
-    //echo $dates[$i];echo $dates[$i];
     echo '<div class = "well">';
     echo '<h1>' . $date . '</h1>';
     echo '<h2>Foods</h2>';
