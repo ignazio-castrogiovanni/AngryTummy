@@ -1,5 +1,8 @@
 <?php
 session_start();
+$local = FALSE;
+$DEBUG = FALSE;
+
 echo '  <head>
             <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
             <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -21,11 +24,24 @@ echo '  <head>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
             <link rel="stylesheet" type="text/css" href="main.css">';
 
-// Establish DB connection
-$servername = "localhost";
-$username = "ignazio1_root";
-$password = "19Baltic";
-$dbname = "ignazio1_angrymemory";
+
+if($local) {
+
+    // Temp for local user - comment for remote
+    $_SESSION['loginID'] = '10206506391273655';
+    $_SESSION['username'] = 'TempUser';
+
+// Local
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+    $dbname = "ignazio1_angrymemory";
+} else {
+    $servername = "localhost";
+    $username = "ignazio1_root";
+    $password = "19Baltic";
+    $dbname = "ignazio1_angrymemory";
+}
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 if($conn->connect_error) {
@@ -52,9 +68,14 @@ foreach($dates as $date) {
     echo '<h2>Foods</h2>';
 
     // Foods query
-    $sql = "SELECT DISTINCT Foods.Name, Date FROM FoodsUsersExperience, Foods
+    $sql_food_query = "SELECT DISTINCT Foods.Name, Date FROM FoodsUsersExperience, Foods
     WHERE User = " . $_SESSION['userID'] . " AND Foods.ID = Food AND Date = '" . $date . "'";
-    $sql_result = mysqli_query($conn, $sql) or die();
+
+    if($DEBUG) {
+        echo $sql_food_query;
+    }
+
+    $sql_result = mysqli_query($conn, $sql_food_query) or die();
 
     // Print foods
     while ($foods = $sql_result->fetch_assoc()) {
@@ -65,9 +86,12 @@ foreach($dates as $date) {
     echo '<h2>Diseases</h2>';
 
     // Diseases query
-    $sql = "SELECT DISTINCT TummyReactions.Description, Date FROM FoodsUsersExperience, TummyReactions
+    $sql_tummy_reactions = "SELECT DISTINCT TummyReactions.Description, Date FROM FoodsUsersExperience, TummyReactions
     WHERE User = " . $_SESSION['userID'] . " AND TummyReactions.ID = TummyReaction AND Date = '" . $date . "'";
-    $sql_result = mysqli_query($conn, $sql) or die();
+    if($DEBUG) {
+        echo $sql_tummy_reactions;
+    }
+    $sql_result = mysqli_query($conn, $sql_tummy_reactions) or die();
 
     // Print diseases
     while ($diseases = $sql_result->fetch_assoc()) {

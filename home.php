@@ -15,12 +15,25 @@ echo '  <head>
             <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
 </head>';
+$local = FALSE;
 
+if($local) {
 
+    // Temp for local user - comment for remote
+    $_SESSION['loginID'] = '10206506391273655';
+    $_SESSION['username'] = 'TempUser';
+
+// Local
+    $servername = "localhost";
+    $username = "root";
+    $password = "root";
+    $dbname = "ignazio1_angrymemory";
+} else {
     $servername = "localhost";
     $username = "ignazio1_root";
     $password = "19Baltic";
     $dbname = "ignazio1_angrymemory";
+}
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -136,7 +149,7 @@ echo '<div class="container">
 
 echo '<h1>What did you eat?</h1>';
 $sql_query_user_foods = "SELECT * FROM `FoodsUsersXref`, `Foods`
-WHERE `Foods`.`ID` = `FoodsUsersXref`.`Food`";
+WHERE `Foods`.`ID` = `FoodsUsersXref`.`Food` AND `User` = " . $_SESSION['loginID'];
 
         //$sql = "SELECT * FROM `angrytummy`.`FoodsUsers`";
 
@@ -183,7 +196,12 @@ while ( $disease = $query_resource->fetch_assoc() ) {
 echo '</div>';
 
 echo '<input  class = "btn btn-primary pull-left" type="submit" value = "Submit" />';
-echo '<a href="http://ignazio-castrogiovanni.com/angrytummy/summary.php" class = "btn btn-default pull-right" role = "button" >Summary</a>';
+if ($local) {
+    echo '<a href="http://localhost/summary.php" class = "btn btn-default pull-right" role = "button" >Summary</a>';
+} else {
+    echo '<a href="http://ignazio-castrogiovanni.com/angrytummy/summary.php" class = "btn btn-default pull-right" role = "button" >Summary</a>';
+}
+
 echo '</form>';
 echo '</div>';
 
