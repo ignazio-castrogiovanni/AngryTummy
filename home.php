@@ -14,6 +14,21 @@ echo '  <head>
             <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
             <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
             <script type="text/javascript" src="bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+            <script>
+                $(document).ready(function(){
+
+                    $("input[class^=\"class\"]").click(function() {
+                        var $this = $(this);
+                        if ($this.is(".class0")) {
+                            if($(".class0:checked").length > 0) {
+                                $(".class1").prop({ disabled: true, checked: false });
+                            } else {
+                                $(".class1").prop("disabled", false );
+                            }
+                        }
+                    });
+                });
+            </script>
 </head>';
 $local = FALSE;
 
@@ -189,7 +204,7 @@ $query_resource = mysqli_query($conn, $sql_query_user_foods) or die(mysql_error(
 echo "<div class = 'checkbox'>";
 while ( $disease = $query_resource->fetch_assoc() ) {
     echo '<div>';
-    echo '<input type="checkbox" id = "' . $disease["Description"] .'" name="check_box_diseases[]" value="'. $disease["ID"] . '" /> <label for="' . $disease["Description"] .'">' . $disease["Description"] . '</label> <br/>';
+    echo '<input class = "' . $disease["Class"] . '" type="checkbox" id = "' . $disease["Description"] .'" name="check_box_diseases[]" value="'. $disease["ID"] . '" /> <label for="' . $disease["Description"] .'">' . $disease["Description"] . '</label> <br/>';
     echo '</div>';
 }
 
