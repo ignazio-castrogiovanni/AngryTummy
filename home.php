@@ -214,6 +214,7 @@ echo '<input  class = "btn btn-primary pull-left" type="submit" value = "Submit"
 if ($local) {
     echo '<a href="http://localhost/summary.php" class = "btn btn-default pull-right" role = "button" >Summary</a>';
 } else {
+    echo '<a href="http://ignazio-castrogiovanni.com/angrytummy/correlation.php" class = "btn btn-default pull-right" role = "button" >Correlation</a>';
     echo '<a href="http://ignazio-castrogiovanni.com/angrytummy/summary.php" class = "btn btn-default pull-right" role = "button" >Summary</a>';
 }
 
